@@ -1,4 +1,3 @@
-file_path = "Day1/input.txt"
 
 def string_to_int(string):
     if "one" in string:
@@ -24,37 +23,35 @@ def string_to_int(string):
     return string
 
 
+def get_lines(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+        return lines
 
+def part1(lines):
+    total = 0
+    for line in lines:
+        line = line.replace("\n", "")
+        numbers = [int(x) for x in line if x.isdigit()]
+        calibration_number = str(numbers[0]) + str(numbers[-1])
+        calibration_number = int(calibration_number)
+        total += calibration_number
+    return total
 
-file_path = "Day1/input.txt"
-
-string1 = "six1mpffbnbnnlxthree"
-print(string_to_int(string1))
-
-with open(file_path, 'r') as file:
-    lines = file.readlines()
+def part2(lines):
     total = 0
     for line in lines:
         line = line.replace("\n", "")
         line = string_to_int(line)
-        print(line)
-        numbers = [int(x) for x in line if x.isdigit()]
-        print(numbers)
-        calibration_number = str(numbers[0]) + str(numbers[-1])
-        calibration_number = int(calibration_number)
-        total += calibration_number
-        print(calibration_number)
-print(total)
-
-with open(file_path,'r') as file:
-    lines = file.readlines()
-    total = 0
-    for line in lines:
-        line = line.replace("\n", "")
         numbers = [int(x) for x in line if x.isdigit()]
         calibration_number = str(numbers[0]) + str(numbers[-1])
         calibration_number = int(calibration_number)
         total += calibration_number
-        
+    return total
 
-print(total)
+
+if __name__ == "__main__":
+    file_path = "Day1/input.txt"
+    lines = get_lines(file_path)
+    print("Part 1: " + str(part1(lines)))
+    print("Part 2: " + str(part2(lines)))
